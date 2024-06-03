@@ -8,16 +8,16 @@ export default function Footer() {
         <div className="quick_links">
           <h4>Categories</h4>
           <p>
-            <a href="/activities">Medicine</a>
+            <a href="/activities">Tablets</a>
           </p>
           <p>
             <a href="/activities">Medicine</a>
           </p>
           <p>
-            <a href="/activities">Medicine</a>
+            <a href="/activities">Capsules</a>
           </p>
           <p>
-            <a href="/activities">Medicine</a>
+            <a href="/activities">Syrups</a>
           </p>
         </div>
         <div className="high_school">

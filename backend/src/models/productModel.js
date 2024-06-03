@@ -42,6 +42,10 @@ const productSchema = new mongoose.Schema({
     enum: ["Medicine", "Tablets", "Capsules", "Syrups"],
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Product = mongoose.model("product", productSchema);

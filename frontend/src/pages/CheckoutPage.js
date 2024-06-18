@@ -1,4 +1,3 @@
-
 // CheckoutPage.js
 
 import React, { useEffect, useState } from "react";
@@ -26,11 +25,34 @@ function CheckoutPage() {
     );
   };
 
-  const handlePlaceOrder = () => {
-    // Clear the cart items from localStorage
-    localStorage.removeItem(CART_STORAGE_KEY);
-    // Navigate to OrderPlacedPage
-    navigate("/order-placed");
+  const handlePlaceOrder = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/orders`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
+          body: JSON.stringify({ cartItems }),
+        }
+      );
+
+      console.log(1);
+      console.log(response)
+      
+      if (!response.ok) {
+        throw new Error("Failed to place order");
+      }
+      console.log(2);
+
+      localStorage.removeItem(CART_STORAGE_KEY);
+      navigate("/order-placed");
+    } catch (error) {
+      console.error("Error placing order:", error.message);
+      // Handle error
+    }
   };
 
   return (
@@ -54,7 +76,7 @@ function CheckoutPage() {
                 <input type="text" required />
               </div>
             </div>
-            <div className="form_group" style={{width:"100%"}}>
+            <div className="form_group" style={{ width: "100%" }}>
               <label>Company name (optional)</label>
               <input type="text" />
             </div>
@@ -80,7 +102,7 @@ function CheckoutPage() {
                 placeholder="Apartment, suite, unit, etc. (optional)"
               />
             </div> */}
-            <div className="form_group" style={{width:"100%"}}>
+            <div className="form_group" style={{ width: "100%" }}>
               <label>
                 Town / City <span>*</span>
               </label>
@@ -96,7 +118,7 @@ function CheckoutPage() {
                 </option>
               </select>
             </div> */}
-            <div className="form_group" style={{width:"100%"}}>
+            <div className="form_group" style={{ width: "100%" }}>
               <label>
                 Postcode / ZIP <span>*</span>
               </label>
@@ -127,8 +149,12 @@ function CheckoutPage() {
                 <td>₹ {calculateTotalPrice().toFixed(2)}</td>
               </tr>
               <tr>
-                <td><b>Total</b></td>
-                <td><b>₹ {calculateTotalPrice().toFixed(2)}</b></td>
+                <td>
+                  <b>Total</b>
+                </td>
+                <td>
+                  <b>₹ {calculateTotalPrice().toFixed(2)}</b>
+                </td>
               </tr>
             </tbody>
           </table>

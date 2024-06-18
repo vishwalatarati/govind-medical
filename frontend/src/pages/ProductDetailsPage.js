@@ -218,7 +218,7 @@ function ProductDetailsContainer() {
         <p className="unit">
           <b>Unit:</b> {product.unit}
         </p>
-        <p className="HSN_number">
+        {/* <p className="HSN_number">
           <b>HSN Number:</b> {product.HSN_number}
         </p>
         <p className="min_quantity">
@@ -229,7 +229,7 @@ function ProductDetailsContainer() {
         </p>
         <p className="self_number">
           <b>Self Number:</b> {product.self_number}
-        </p>
+        </p> */}
         <p className="category">
           <b>Category:</b> {product.category}
         </p>
